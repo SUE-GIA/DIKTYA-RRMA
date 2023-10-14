@@ -2,48 +2,48 @@
 
 ---
 
-######*STEFANOS PANAGIOTIS GIANNAKOS 3568*
+*STEFANOS PANAGIOTIS GIANNAKOS 3568*
 
 ---
 
-##Server Initialization
+Server Initialization
 *The Server class serves as the entry point. It initializes a server socket and listens for incoming connections on the specified port. Upon client connection, it creates a new MessagingClient instance to handle communication with the client.*
 
-##MessagingClient Class
+MessagingClient Class
 *The MessagingClient class extends the Thread class, enabling concurrent handling of multiple clients. Each instance of MessagingClient manages the communication with a single client.*
 
-##Client Request Handling
+Client Request Handling
 *Client requests are processed within the run() method of MessagingClient. The client sends requests in the form of strings with specific formats, and these requests are split and interpreted. Depending on the function identifier (FN_ID) in the request, different functions are called to handle specific actions.*
 
-##Multithreading
+Multithreading
 *Multithreading is employed to handle multiple clients concurrently. Each client connection is managed by a separate thread, allowing for efficient handling of simultaneous client interactions while avoiding conflicts through the use of locks.*
 
-##Key Functions
-####handleFunction1: 
+Key Functions
+handleFunction1: 
 *Handles user registration. It checks if a username is valid, not already taken, and then creates a new user account.*
 
-####handleFunction2:
+handleFunction2:
 *Retrieves a list of usernames of all registered users when provided with a valid authentication token.*
 
-####handleFunction3:
+handleFunction3:
 *Facilitates message sending between users. It ensures that both sender and recipient exist and adds the message to the recipient's inbox.*
 
-####handleFunction4:
+handleFunction4:
 *Retrieves a user's messages when provided with a valid authentication token.*
 
-####handleFunction5:
+handleFunction5:
 *Retrieves and marks a specific message as read when provided with a valid authentication token and message ID.*
 
-####handleFunction6:
+handleFunction6:
 *Deletes a specific message when provided with a valid authentication token and message ID.*
 
 
-##Thread Safety
+Thread Safety
 *Thread safety is ensured by using a ReentrantLock to protect shared data structures such as the list of user accounts. This prevents data corruption when multiple threads attempt to access or modify these structures concurrently.*
 ***
-##Client:
+Client:
 *The client accepts command-line arguments for specifying the hostname, port, function identifier (FN_ID), and function-specific arguments. It connects to the server, sends requests, and receives responses.*
-###Key Functionality:
+Key Functionality:
 *Command-Line Parameters: The client expects the user to provide the hostname, port number, FN_ID (function identifier), and function-specific arguments as command-line parameters.*
 
 *Socket Communication: It establishes a socket connection to the specified server and communicates with it through input and output streams.*
@@ -53,7 +53,7 @@
 *Error Handling: The client handles exceptions related to socket operations, such as UnknownHostException, EOFException, and IOException.*
 
 ---
-##Account:
+Account:
 *The Account class represents user accounts in the messaging system. It stores the username, authentication token, and the user's message box.*
 
 *Constructor: Creates an account with a username and authentication token.*
@@ -72,7 +72,7 @@
 
 ---
 
-##Messages:
+Messages:
 *The Message class represents individual messages within the messaging system:*
 
 *Constructor: Creates a message with sender, receiver, body, and an ID, initially marked as unread.*
@@ -91,54 +91,54 @@
 
 ---
 ---
-## ***HOW TO RUN:***
+ ***HOW TO RUN:***
 ***
 
-###***Server:***
+***Server:***
 
-####```java Server < port number >```
-
-***
-###***Client:***
-
-####```java Client < ip > < port number > < fn_id > < args >```
+```java Server < port number >```
 
 ***
-###***Functionality 1: User Registration:***
+***Client:***
 
-####Register a new user:
-#####```java Client <hostname> <port> 1 <username>```
-***
-
-###***Functionality 2: Get Usernames:***
-
-####Retrieve a list of all registered usernames:
-#####```java Client <hostname> <port> 2 <authToken>```
+```java Client < ip > < port number > < fn_id > < args >```
 
 ***
-###***Functionality 3: Send Message:***
+***Functionality 1: User Registration:***
 
-####Send a message to a user:
-#####```java Client <hostname> <port> 3 <authToken> <recipient> "<message>"```
+Register a new user:
+```java Client <hostname> <port> 1 <username>```
+***
+
+***Functionality 2: Get Usernames:***
+
+Retrieve a list of all registered usernames:
+```java Client <hostname> <port> 2 <authToken>```
 
 ***
-###***Functionality 4: Get User Messages:***
+***Functionality 3: Send Message:***
 
-####Retrieve messages for a user:
-#####```java Client <hostname> <port> 4 <authToken>```
-
-***
-###***Functionality 5: Read Message:***
-
-####Read a specific message:
-#####```java Client <hostname> <port> 5 <authToken> <messageID>```
+Send a message to a user:
+```java Client <hostname> <port> 3 <authToken> <recipient> "<message>"```
 
 ***
-###***Functionality 6: Delete Message:***
+***Functionality 4: Get User Messages:***
 
-####Delete a specific message:
-#####```java Client <hostname> <port> 6 <authToken> <messageID>```
+Retrieve messages for a user:
+```java Client <hostname> <port> 4 <authToken>```
+
 ***
-#####Replace 
+***Functionality 5: Read Message:***
+
+Read a specific message:
+```java Client <hostname> <port> 5 <authToken> <messageID>```
+
+***
+***Functionality 6: Delete Message:***
+
+Delete a specific message:
+```java Client <hostname> <port> 6 <authToken> <messageID>```
+***
+Replace 
 ```<hostname>, <port>, <authToken>, <username>, <recipient>, <message>, and <messageID>```
-#####with the appropriate values for your use case.
+with the appropriate values for your use case.
